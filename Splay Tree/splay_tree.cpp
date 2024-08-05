@@ -220,6 +220,59 @@ struct SPLAY {
         }
     }
 
+    //노드 a 바로 왼쪽에 노드 b가 오게 push합니다.
+    void pushLeft (Node *a, Node* b) {
+        splay(b); splay(a);
+
+        if (!a->l) {
+            a->l = b;
+            b->p = a;
+
+            a->update();
+            return;
+        }
+
+        Node *temp = a->l;
+        temp->propagate();
+
+        while(temp->r) {
+            temp = temp->r;
+            temp->propagate();
+        }
+
+        temp->r = b;
+        b->p = temp;
+
+        splay(b);
+    }
+
+    //노드 a오른쪽에 바로 노드 b가 오게 push합니다.
+    void pushRight (Node *a, Node *b) {
+        splay(b); splay(a);
+
+        if (!a->r) {
+            a->r = b;
+            b->p = a;
+
+            a->update();
+            return;
+        }
+
+        Node *temp = a->r;
+        temp->propagate();
+
+        while(temp->l) {
+            temp = temp->l;
+            temp->propagate();
+        }
+
+        temp->l = b;
+        b->p = temp;
+
+        splay(b);
+    }
+
+
     //변수 order(1-based) 번째의 노드를 SPLAY 합니다. 구간 범위 아웃일 경우 False
     bool findKth (int order) {
         if (size() < order) return false;

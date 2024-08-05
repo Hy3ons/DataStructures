@@ -2,7 +2,6 @@
 //모든 함수의 매개변수 구간 [l, r] 은 1-based로 집어넣으면 됩니다.
 
 SPLAY spl;
-
 //특정 노드를 없앱니다.
 void destroy (Node *a)
 void erase (Node *a)
@@ -10,6 +9,12 @@ void erase (lint key)
 
 //key 값과 value 값을 넣습니다. 있다면 value를 덮어씁니다.
 void push (lint key, lint value)
+//노드 a 바로 왼쪽에 노드 b가 오게 push합니다.
+void pushLeft (Node *a, Node* b)
+//노드 a오른쪽에 바로 노드 b가 오게 push합니다.
+void pushRight (Node *a, Node *b)
+
+
 //변수 order(1-based) 번째의 노드를 SPLAY 합니다. 구간 범위 아웃일 경우 False
 bool findKth (int order)
 //key 값을 가진 노드를 splay 시킵니다. key값을 가진 노드가 없으면 False를 리턴합니다.
